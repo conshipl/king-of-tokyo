@@ -54,16 +54,14 @@ public class Player {
       } // end if
     } // end for
 
-    this.scoreDigits(count_ones);
-    this.scoreDigits(count_twos);
-    this.scoreDigits(count_threes);
+    this.scoreDigits(count_ones, 1);
+    this.scoreDigits(count_twos, 2);
+    this.scoreDigits(count_threes, 3);
   } // end resolveDigits
 
-  public void scoreDigits(int count){
-    this.victory_points += (count / 3);
-    count -= 3;
-    if (count > 0){
-      this.victory_points += (count % 3);
+  public void scoreDigits(int count, int factor){
+    if (count >= 3){
+      this.victory_points += ((1 * factor) + (count % 3));
     } // end if
   } // end scoreDigits
 
