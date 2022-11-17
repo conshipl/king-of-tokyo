@@ -61,7 +61,7 @@ public class Player {
 
   public void scoreDigits(int count, int factor){
     if (count >= 3){
-      this.victory_points += ((1 * factor) + (count % 3));
+      this.victory_points += ((1 * factor) + (count - 3));
     } // end if
   } // end scoreDigits
 
