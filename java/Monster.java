@@ -37,7 +37,7 @@ public class Monster {
  
   public void inTokyo(){
     if (this.location.equals("Tokyo")){
-      System.out.println(this.name + " starts their turn in Tokyo and is awarded 2 Victory Points!");
+      System.out.println(this.name + " starts their turn in Tokyo and is awarded 2 Victory Points!\n");
       this.victory_points += 2;
     } // end if
   } // end inTokyo

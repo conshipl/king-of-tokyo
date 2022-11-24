@@ -58,10 +58,16 @@ public class Game {
 
   public boolean checkWinner(){
     for (Player player: this.players){
-      if (this.victoryByDeath(player) || this.victoryByPoints(player)){
-        System.out.println(player.name + " has won the game!");
+      if (this.victoryByDeath(player)){
+	this.clearScreen();
+        System.out.println(player.monster.name + " has won the game by eliminating all other monsters!");
 	return true;
-      } else if (this.countAlive() == 0){
+      } else if (this.victoryByPoints(player)){
+	this.clearScreen();
+        System.out.println(player.monster.name + " has won the game by being the first to reach 20 Victory Points!");
+        return true;	
+      } else if	(this.countAlive() == 0){
+	this.clearScreen();
         System.out.println("All players have died battling for Tokyo; NO WINNER!");
 	return true;
       } // end if

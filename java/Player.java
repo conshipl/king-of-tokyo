@@ -68,7 +68,7 @@ public class Player {
   public void scoreDigits(int count, int factor){
     if (count >= 3){
       int points_scored = (factor + (count - 3));
-      System.out.println(this.monster.name + " scores " + points_scored + " victory points for rolling " + count + " " + factor + "'s!");
+      System.out.println(this.monster.name + " scores " + points_scored + " Victory Points for rolling " + count + " " + factor + "'s!");
       this.monster.victory_points += points_scored;
     } // end if
   } // end scoreDigits
