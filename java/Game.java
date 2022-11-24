@@ -4,6 +4,7 @@ public class Game {
 
   protected Dice[] dice = new Dice[6];
   protected ArrayList<Player> players = new ArrayList<Player>();
+  protected ArrayList<String> monsters = new ArrayList<String>();
 
   public static void main(String[] args){
     Game game = new Game();
@@ -11,6 +12,7 @@ public class Game {
   } // end main
 
   public Game(){
+    this.populateMonsters();
     this.populateDice();
     this.populatePlayers();
     this.populateOpponents();
@@ -122,11 +124,37 @@ public class Game {
     return num_players;
   } // end numberOfPlayers
 
+  public void chooseMonster(Player player){
+    Scanner input = new Scanner(System.in);
+    String choice;
+    System.out.println(player.name + ", please select which monster you'd like to play as:\n");
+    for (int i = 0; i < this.monsters.size(); i++){
+      int number = i + 1;
+      System.out.println(number + ") " + this.monsters.get(i));
+    } // end for
+    System.out.print("\nEnter choice: ");
+    choice = input.nextLine();
+    int number_choice = Integer.parseInt(choice) - 1;
+    player.monster.name = this.monsters.get(number_choice);
+    System.out.println(player.name + " is playing as " + player.monster.name + "!\n");
+    this.monsters.remove(number_choice);
+  } // end chooseMonster
+
+  public void populateMonsters(){
+    this.monsters.add("GIGAZAUR");
+    this.monsters.add("CYBERKITTY");
+    this.monsters.add("MEKADRAGON");
+    this.monsters.add("SPACEPENGUIN");
+    this.monsters.add("KRAKEN");
+    this.monsters.add("KONG");   
+  } // end populateMonsters
+
   public void populatePlayers(){
     int num_players = this.numberOfPlayers();
     for (int i = 0; i < num_players; i++){
       Player player = new Player();
       this.players.add(player);
+      this.chooseMonster(player);
     } // end for
   } // end populatePlayers
 
@@ -199,11 +227,11 @@ public class Game {
       i++;
     } // end while
     if (!keepGoing){
-      System.out.print("[Final Roll]: ");
+      System.out.print("\n[Final Roll]: ");
       this.showDice();
     } else {
       this.rollDice();
-      System.out.print("[Final Roll]: ");
+      System.out.print("\n[Final Roll]: ");
       this.showDice();
     } // end if
     this.resetDice();
