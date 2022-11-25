@@ -3,8 +3,13 @@ import java.util.*;
 public class Player {
 
   protected String name;
+  protected String password;
   protected Monster monster = new Monster();
   protected ArrayList<Player> opps = new ArrayList<>();
+  protected int wins;
+  protected int draws;
+  protected int losses;
+  // add hashmap <String, Integer> that ties monster names with number of times the player has played at them, so player could view most played monster
 
   public static void main(String[] args){
     Player player = new Player();
@@ -12,6 +17,9 @@ public class Player {
   } // end main
 
   public Player(){
+    // enter new name
+    // enter new password (maybe write a function that can handle name and password simultaneously and is called during constructor)
+    // sets win, draws, and losses to 0
     ;
   } // end default constructor
 
