@@ -146,6 +146,19 @@ public class Game {
     this.monsters.remove(number_choice);
   } // end chooseMonster
 
+  /*public Player login(){
+    // ask player if they'd like to login or create new player
+    // if they select login, ask user to input login and password
+    // try to load the binary tree from .ser file
+    //   if unsuccessful, return new Player()
+    //   if successful, traverse tree and find player and compare inputs
+    //     if unsuccessful, ask user to login again
+    //     if successful, return saved Player instance
+    // if they select create new player, create new Player() and ask them to enter new login credentials
+    //   add player to binary tree and serialize
+    //   return new Player() instance
+  } // end login*/
+
   public void populateMonsters(){
     this.monsters.add("GIGAZAUR");
     this.monsters.add("CYBERKITTY");
