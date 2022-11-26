@@ -12,6 +12,11 @@ public class MainMenu {
     ;
   } // end default constructor
 
+  /* Should be able to visualize binary tree (print in console) per Jovian
+
+  /* Should be able to search and view the stats for an individual player (W/D/L and Most/Least Played Monsters)*/
+  /* You can deserialize the same object twice into two different (in memory location) instances with the same data*/
+
   public void menu(){
     Scanner input = new Scanner(System.in);
     System.out.println("---KING OF TOKYO---\n");
