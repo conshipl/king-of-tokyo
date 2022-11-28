@@ -76,9 +76,23 @@ public class Game {
   public boolean checkWinner(){
     for (Player player: this.players){
       if (this.victoryByDeath(player)){
+	return true;
+      } else if (this.victoryByPoints(player)){
+        return true;	
+      } else if	(this.countAlive() == 0){
+	return true;
+      } // end if
+    } // end for
+    return false;
+  } // end checkWinner
+
+  public boolean declareWinner(){
+    for (Player player: this.players){
+      if (this.victoryByDeath(player)){
 	this.clearScreen();
 	this.awardWinLoss(player);
         System.out.println(player.monster.name + " has won the game by eliminating all other monsters!\n");
+	this.incMonsterCount();
 	this.serialize();
 	this.pressAnyKey();
 	return true;
@@ -86,6 +100,7 @@ public class Game {
 	this.clearScreen();
 	this.awardWinLoss(player);
         System.out.println(player.monster.name + " has won the game by being the first to reach 20 Victory Points!\n");
+	this.incMonsterCount();
 	this.serialize();
 	this.pressAnyKey();
         return true;	
@@ -93,6 +108,7 @@ public class Game {
 	this.clearScreen();
 	this.awardDraw();
         System.out.println("All players have died battling for Tokyo; NO WINNER!\n");
+	this.incMonsterCount();
 	this.serialize();
 	this.pressAnyKey();
 	return true;
@@ -101,10 +117,17 @@ public class Game {
     return false;
   } // end checkWinner
 
+  public void incMonsterCount(){
+    for (Player player: this.players){
+      player.monster_count.replace(player.monster.name, player.monster_count.get(player.monster.name) + 1);
+    } // end for
+  } // end incMonsterCount
+
   public void match(){
     while (!this.checkWinner()){
       this.round();
     } // end while
+    this.declareWinner();
   } // end match
 
   public void round(){

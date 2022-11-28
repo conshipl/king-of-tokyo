@@ -1,8 +1,10 @@
 import java.util.*;
+import java.io.*;
 
 public class MainMenu {
 
   protected Game game;
+  protected ArrayList<Player> accounts;
   
   public static void main(String[] args){
     MainMenu main_menu = new MainMenu();
@@ -33,27 +35,32 @@ public class MainMenu {
       if (choice.equals("1")){
 	this.clearScreen();
         this.game = new Game();
-      } /*else if (choice.equals("2")){
-        try {
-          FileInputStream fileIn = new FileInputStream("game_data.ser");
-	  ObjectInputStream objIn = new ObjectInputStream(fileIn);
-	  this.game = (Game)objIn.readObject();
-	  objIn.close();
-	  fileIn.close();
-        } catch (IOException e){
-	  System.out.println(e.getMessage());
-	  System.out.println("Game could not be loaded; new game has been created.");
-        } catch (ClassNotFoundException c){
-            System.out.println(c.getMessage());
-        } // end try-catch
-      }*/ else if (choice.equals("2")){
-        ;
+      } else if (choice.equals("2")){
+        this.populateAccounts();
+	for (Player account: this.accounts){
+          account.showStats();
+        } // end for
       } else if (choice.equals("3")){
-        ;
+        this.populateAccounts();
       } else if (choice.equals("4")){
         keepGoing = false;
       } // end if
     } // end while
   } // end menu
+
+  public void populateAccounts(){
+    try {
+      FileInputStream fileIn = new FileInputStream("accounts.ser");
+      ObjectInputStream objIn = new ObjectInputStream(fileIn);
+      this.accounts = (ArrayList<Player>)objIn.readObject();
+      objIn.close();
+      fileIn.close();
+    } catch (IOException e){
+      System.out.println(e.getMessage());
+      this.accounts = new ArrayList<>();
+    } catch (ClassNotFoundException c){
+      System.out.println(c.getMessage());
+    } // end try-catch
+  } // end populateAccounts
 
 } // end class def

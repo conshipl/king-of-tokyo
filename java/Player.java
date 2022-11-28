@@ -10,7 +10,7 @@ public class Player implements Serializable {
   protected int wins;
   protected int draws;
   protected int losses;
-  // add hashmap <String, Integer> that ties monster names with number of times the player has played at them, so player could view most played monster
+  protected Hashtable<String, Integer> monster_count;
 
   public static void main(String[] args){
     Player player = new Player();
@@ -24,7 +24,46 @@ public class Player implements Serializable {
     this.wins = 0;
     this.draws = 0;
     this.losses = 0;
+    this.monster_count = new Hashtable<String, Integer>();
+    this.populateMonsterCounter();
   } // end default constructor
+
+  public void populateMonsterCounter(){
+    this.monster_count.put("GIGAZAUR", 0);
+    this.monster_count.put("CYBERKITTY", 0);
+    this.monster_count.put("MEKADRAGON", 0);
+    this.monster_count.put("SPACEPENGUIN", 0);
+    this.monster_count.put("KRAKEN", 0);
+    this.monster_count.put("KONG", 0);
+  } // end populateMonsterCounter
+
+  public String leastPlayedMonster(){
+    String monster = "NONE";
+    int count = 0;
+    Enumeration<String> monsters = monster_count.keys();
+    while (monsters.hasMoreElements()){
+      String key = monsters.nextElement();
+      if (monster.equals("NONE") || monster_count.get(key) < count){
+        monster = key;
+	count = monster_count.get(key);
+      } // end if
+    } // end while
+    return (monster + ", " + count + " plays");  
+  } // end leastPlayedMonster
+
+  public String mostPlayedMonster(){
+    String monster = "NONE";
+    int count = 0;
+    Enumeration<String> monsters = monster_count.keys();
+    while (monsters.hasMoreElements()){
+      String key = monsters.nextElement();
+      if (monster.equals("NONE") || monster_count.get(key) > count){
+        monster = key;
+	count = monster_count.get(key);
+      } // end if
+    } // end while
+    return (monster + ", " + count + " plays");  
+  } // end leastPlayedMonster
 
   public void accountName(){
     Scanner input = new Scanner(System.in);
@@ -39,7 +78,7 @@ public class Player implements Serializable {
   } // end accountPassword
 
   public void showStats(){
-    System.out.println("Player: " + this.name + "\nWins: " + this.wins + "\nDraws: " + this.draws + "\nLosses: " + this.losses);
+    System.out.println("Player: " + this.name + "\nWins: " + this.wins + "\nDraws: " + this.draws + "\nLosses: " + this.losses + "\nLeast Played Monster: " + this.leastPlayedMonster() + "\nMost Played Monster: " + this.mostPlayedMonster());
   } // end showStats
 
   public void showPlayer(){
