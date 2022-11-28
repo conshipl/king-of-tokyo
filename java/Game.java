@@ -16,6 +16,7 @@ public class Game {
     this.populateDice();
     this.populatePlayers();
     this.populateOpponents();
+    this.match();
   } // end default constructor
 
   public void clearScreen(){  
@@ -110,6 +111,13 @@ public class Game {
     this.clearScreen();
   } // end startTurn
 
+  public void pressAnyKey(){
+    Scanner input = new Scanner(System.in);
+    System.out.print("Press any key to continue.");
+    input.nextLine();
+    this.clearScreen();
+  } // end pressAnyKey
+
   public void showTable(Player player){
     System.out.println("OPPONENTS:");
     for (Player opponent: player.opps){
@@ -146,7 +154,48 @@ public class Game {
     this.monsters.remove(number_choice);
   } // end chooseMonster
 
-  /*public Player login(){
+  public Player playerMenu(int i){
+    boolean keepGoing = true;
+    while (keepGoing){
+      Scanner input = new Scanner(System.in);
+      System.out.print("---Player " + i + "---\n\n1) Login\n2) Create New Account\n\nEnter choice: ");
+      String choice = input.nextLine();
+      if (choice.equals("1")){
+        keepGoing = false;
+	Player player = this.login();
+	return player;
+      } else if (choice.equals("2")){
+        keepGoing = false;
+	// add player to binary tree (and serialize?)
+      } else {
+        System.out.println("Sorry, I didn't understand. Please try again!\n");
+      } // end if
+    } // end while
+    return new Player();
+  } // end playerMenu
+
+  public Player login(){
+    boolean keepGoing = true;
+    while (keepGoing){
+      Scanner input = new Scanner(System.in);
+      System.out.print("Enter account name (type EXIT to create new player and quit login): ");
+      String inp_acc_num = input.nextLine();
+      System.out.print("Enter account password: ");
+      String inp_acc_pw = input.nextLine();
+      keepGoing = false;
+      // for player in binary tree
+      //   if player account name equals EXIT
+      //     keepGoing = false;
+      //     Player player = new Player();
+      //     add player to binary tree (and serialize?)
+      //     return player
+      //   else if player account name and password match
+      //     keepGoing = false;
+      //     return player
+      // // end for
+      // print Incorrect name or password; please try again!
+    } // end while
+    return new Player();
     // ask player if they'd like to login or create new player
     // if they select login, ask user to input login and password
     // try to load the binary tree from .ser file
@@ -154,10 +203,7 @@ public class Game {
     //   if successful, traverse tree and find player and compare inputs
     //     if unsuccessful, ask user to login again
     //     if successful, return saved Player instance
-    // if they select create new player, create new Player() and ask them to enter new login credentials
-    //   add player to binary tree and serialize
-    //   return new Player() instance
-  } // end login*/
+  } // end login
 
   public void populateMonsters(){
     this.monsters.add("GIGAZAUR");
@@ -171,9 +217,10 @@ public class Game {
   public void populatePlayers(){
     int num_players = this.numberOfPlayers();
     for (int i = 0; i < num_players; i++){
-      Player player = new Player();
+      Player player = this.playerMenu(i + 1);
       this.players.add(player);
       this.chooseMonster(player);
+      this.pressAnyKey();
     } // end for
   } // end populatePlayers
 

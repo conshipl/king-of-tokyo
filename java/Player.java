@@ -17,11 +17,24 @@ public class Player {
   } // end main
 
   public Player(){
-    // enter new name
-    // enter new password (maybe write a function that can handle name and password simultaneously and is called during constructor)
-    // sets win, draws, and losses to 0
-    ;
+    this.accountName();
+    this.accountPassword();
+    this.wins = 0;
+    this.draws = 0;
+    this.losses = 0;
   } // end default constructor
+
+  public void accountName(){
+    Scanner input = new Scanner(System.in);
+    System.out.print("Enter new account name: ");
+    this.name = input.nextLine();
+  } // end accountName
+
+  public void accountPassword(){
+    Scanner input = new Scanner(System.in);
+    System.out.print("Enter new account password: ");
+    this.password = input.nextLine();
+  } // end accountPassword
 
   public void showPlayer(){
     System.out.println("\nPlayer: " + name);
