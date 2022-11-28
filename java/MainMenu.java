@@ -6,11 +6,10 @@ public class MainMenu {
   
   public static void main(String[] args){
     MainMenu main_menu = new MainMenu();
-    main_menu.menu();
   } // end main
 
   public MainMenu(){
-    ;
+    this.menu();
   } // end default constructor
 
   /* Should be able to visualize binary tree (print in console) per Jovian
@@ -28,7 +27,7 @@ public class MainMenu {
     while (keepGoing){
       Scanner input = new Scanner(System.in);
       System.out.println("---KING OF TOKYO---\n");
-      System.out.print("1) Start New Game\n2) View Player Tree\n3) View Player Stats\n4) Exit\n\nEnter Choice: ");
+      System.out.print("1) Start New Game\n2) View Player Tree\n3) Search Player Stats\n4) Exit\n\nEnter Choice: ");
       String choice = input.nextLine();
 
       if (choice.equals("1")){

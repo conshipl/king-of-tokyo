@@ -1,11 +1,7 @@
 import java.util.*;
 
-public class Dice {
+public class Dice extends AbstractDice {
   
-  protected int value;
-  protected boolean keep_status = false;
-  protected Hashtable<Integer, String> dict = new Hashtable<Integer, String>();
-
   public static void main(String[] args){
     Dice die = new Dice();
     die.roll();
@@ -34,14 +30,5 @@ public class Dice {
     this.dict.put(4, "Smash");
     this.dict.put(5, "Heal");
   } // end populate_dict
-
-  public void roll(){
-    Random rand = new Random();
-    this.value = rand.nextInt(6);
-  } // end roll
-
-  public String getValue(){
-    return dict.get(this.value);
-  } // end getValue
 
 } // end class def

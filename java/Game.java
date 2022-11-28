@@ -1,10 +1,12 @@
 import java.util.*;
+import java.io.*;
 
 public class Game {
 
   protected Dice[] dice = new Dice[6];
   protected ArrayList<Player> players = new ArrayList<Player>();
   protected ArrayList<String> monsters = new ArrayList<String>();
+  protected ArrayList<Player> accounts;
 
   public static void main(String[] args){
     Game game = new Game();
@@ -12,6 +14,7 @@ public class Game {
   } // end main
 
   public Game(){
+    this.populateAccounts();
     this.populateMonsters();
     this.populateDice();
     this.populatePlayers();
@@ -57,19 +60,41 @@ public class Game {
     return false;
   } // end victoryByPoints
 
+  public void awardWinLoss(Player player){
+    player.wins += 1;
+    for (Player opp: player.opps){
+      opp.losses += 1;
+    } // end for
+  } // end awardWDL
+
+  public void awardDraw(){
+    for (Player player: this.players){
+      player.draws += 1;
+    } // end for
+  } // end awardDraw
+
   public boolean checkWinner(){
     for (Player player: this.players){
       if (this.victoryByDeath(player)){
 	this.clearScreen();
-        System.out.println(player.monster.name + " has won the game by eliminating all other monsters!");
+	this.awardWinLoss(player);
+        System.out.println(player.monster.name + " has won the game by eliminating all other monsters!\n");
+	this.serialize();
+	this.pressAnyKey();
 	return true;
       } else if (this.victoryByPoints(player)){
 	this.clearScreen();
-        System.out.println(player.monster.name + " has won the game by being the first to reach 20 Victory Points!");
+	this.awardWinLoss(player);
+        System.out.println(player.monster.name + " has won the game by being the first to reach 20 Victory Points!\n");
+	this.serialize();
+	this.pressAnyKey();
         return true;	
       } else if	(this.countAlive() == 0){
 	this.clearScreen();
-        System.out.println("All players have died battling for Tokyo; NO WINNER!");
+	this.awardDraw();
+        System.out.println("All players have died battling for Tokyo; NO WINNER!\n");
+	this.serialize();
+	this.pressAnyKey();
 	return true;
       } // end if
     } // end for
@@ -171,7 +196,9 @@ public class Game {
         System.out.println("Sorry, I didn't understand. Please try again!\n");
       } // end if
     } // end while
-    return new Player();
+    Player player = new Player();
+    this.accounts.add(player);
+    return player;
   } // end playerMenu
 
   public Player login(){
@@ -179,30 +206,26 @@ public class Game {
     while (keepGoing){
       Scanner input = new Scanner(System.in);
       System.out.print("Enter account name (type EXIT to create new player and quit login): ");
-      String inp_acc_num = input.nextLine();
+      String inp_acc_name = input.nextLine();
       System.out.print("Enter account password: ");
-      String inp_acc_pw = input.nextLine();
-      keepGoing = false;
-      // for player in binary tree
-      //   if player account name equals EXIT
-      //     keepGoing = false;
-      //     Player player = new Player();
-      //     add player to binary tree (and serialize?)
-      //     return player
-      //   else if player account name and password match
-      //     keepGoing = false;
-      //     return player
-      // // end for
-      // print Incorrect name or password; please try again!
+      String inp_acc_pw = input.nextLine();      
+      for (Player account: this.accounts){
+        if (account.name.equals(inp_acc_name) && account.password.equals(inp_acc_pw)){
+	  keepGoing = false;
+	  account.monster = new Monster();
+	  account.opps = new ArrayList<>();
+	  return account;
+        } // end if
+      } // end for
+      if (inp_acc_name.equals("EXIT")){
+        keepGoing = false;
+      } else {
+	System.out.println("Incorrect name or password; please try again!");      
+      } // end if
     } // end while
-    return new Player();
-    // ask player if they'd like to login or create new player
-    // if they select login, ask user to input login and password
-    // try to load the binary tree from .ser file
-    //   if unsuccessful, return new Player()
-    //   if successful, traverse tree and find player and compare inputs
-    //     if unsuccessful, ask user to login again
-    //     if successful, return saved Player instance
+    Player player = new Player();
+    this.accounts.add(player);
+    return player;
   } // end login
 
   public void populateMonsters(){
@@ -213,6 +236,21 @@ public class Game {
     this.monsters.add("KRAKEN");
     this.monsters.add("KONG");   
   } // end populateMonsters
+
+  public void populateAccounts(){
+    try {
+      FileInputStream fileIn = new FileInputStream("accounts.ser");
+      ObjectInputStream objIn = new ObjectInputStream(fileIn);
+      this.accounts = (ArrayList<Player>)objIn.readObject();
+      objIn.close();
+      fileIn.close();
+    } catch (IOException e){
+      System.out.println(e.getMessage());
+      this.accounts = new ArrayList<>();
+    } catch (ClassNotFoundException c){
+      System.out.println(c.getMessage());
+    } // end try-catch
+  } // end populateAccounts
 
   public void populatePlayers(){
     int num_players = this.numberOfPlayers();
@@ -308,5 +346,17 @@ public class Game {
       die.keep_status = false;
     } // end for
   } // end resetDice
+
+  public void serialize(){
+    try {
+      FileOutputStream fileOut = new FileOutputStream("accounts.ser");
+      ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+      objOut.writeObject(this.accounts);
+      objOut.close();
+      fileOut.close();
+    } catch (IOException e){
+      System.out.println(e.getMessage());
+    } // end try-catch
+  } // end serialize
 
 } // end class def

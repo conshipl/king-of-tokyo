@@ -1,11 +1,12 @@
 import java.util.*;
+import java.io.*;
 
-public class Player {
+public class Player implements Serializable {
 
   protected String name;
   protected String password;
-  protected Monster monster = new Monster();
-  protected ArrayList<Player> opps = new ArrayList<>();
+  protected transient Monster monster = new Monster();
+  protected transient ArrayList<Player> opps = new ArrayList<>();
   protected int wins;
   protected int draws;
   protected int losses;
@@ -14,6 +15,7 @@ public class Player {
   public static void main(String[] args){
     Player player = new Player();
     player.showPlayer();
+    player.showStats();
   } // end main
 
   public Player(){
@@ -36,8 +38,12 @@ public class Player {
     this.password = input.nextLine();
   } // end accountPassword
 
+  public void showStats(){
+    System.out.println("Player: " + this.name + "\nWins: " + this.wins + "\nDraws: " + this.draws + "\nLosses: " + this.losses);
+  } // end showStats
+
   public void showPlayer(){
-    System.out.println("\nPlayer: " + name);
+    System.out.println("\nPlayer: " + this.name);
     this.monster.showMonster();
   } // end showPlayer
 
