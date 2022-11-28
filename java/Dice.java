@@ -19,6 +19,7 @@ public class Dice extends AbstractDice {
   } // end main
 
   public Dice(){
+    this.sides = 6;
     this.populateDict();
   } // end default constructor
   

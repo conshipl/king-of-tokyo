@@ -163,12 +163,16 @@ public class Player implements Serializable {
   public Player applySmash(int count){
     Player current_king = this;
     for (Player opponent: this.opps){
-      if (!opponent.monster.location.equals(this.monster.location)){
+      if (!opponent.monster.location.equals(this.monster.location) && opponent.monster.checkHealth()){
 	System.out.println(this.monster.name + " attacks " + opponent.monster.name + " for " + count + " damage!");
         opponent.monster.health -= count;
       } // end if
       if (opponent.monster.location.equals("Tokyo")){
-        current_king = opponent;
+	if (!opponent.monster.checkHealth()){
+          this.monster.enterTokyo();
+        } else {
+          current_king = opponent;
+	} // end if
       } // end if
     } // end for
     return current_king;   

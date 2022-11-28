@@ -25,6 +25,7 @@ public class Monster {
     if (this.health > 0){
       return true;
     } // end if
+    this.location = "Deceased";
     return false;
   } // end checkHealth
 
