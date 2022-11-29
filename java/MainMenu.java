@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class MainMenu {
+public class MainMenu extends ScreenHelper {
 
   protected Game game;
   protected ArrayList<Player> accounts;
@@ -19,12 +19,8 @@ public class MainMenu {
   /* Should be able to search and view the stats for an individual player (W/D/L and Most/Least Played Monsters)*/
   /* You can deserialize the same object twice into two different (in memory location) instances with the same data*/
 
-  public void clearScreen(){  
-    System.out.print("\033[H\033[2J");  
-    System.out.flush();  
-  } // end clearScreen
-
   public void menu(){
+    this.clearScreen();
     boolean keepGoing = true;
     while (keepGoing){
       Scanner input = new Scanner(System.in);
@@ -37,9 +33,11 @@ public class MainMenu {
         this.game = new Game();
       } else if (choice.equals("2")){
         this.populateAccounts();
+	this.clearScreen();
 	for (Player account: this.accounts){
           account.showStats();
         } // end for
+	this.pressAnyKey();
       } else if (choice.equals("3")){
         this.populateAccounts();
       } else if (choice.equals("4")){
@@ -57,7 +55,7 @@ public class MainMenu {
       fileIn.close();
     } catch (IOException e){
       System.out.println(e.getMessage());
-      this.accounts = new ArrayList<>();
+      System.out.println("\nReturning to Main Menu.");
     } catch (ClassNotFoundException c){
       System.out.println(c.getMessage());
     } // end try-catch

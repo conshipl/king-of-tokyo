@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Game {
+public class Game extends ScreenHelper {
 
   protected Dice[] dice = new Dice[6];
   protected ArrayList<Player> players = new ArrayList<Player>();
@@ -21,11 +21,6 @@ public class Game {
     this.populateOpponents();
     this.match();
   } // end default constructor
-
-  public void clearScreen(){  
-    System.out.print("\033[H\033[2J");  
-    System.out.flush();  
-  } // end clearScreen
 
   public boolean isTokyoEmpty(){
     for (Player player: this.players){
@@ -158,13 +153,6 @@ public class Game {
     input.nextLine();
     this.clearScreen();
   } // end startTurn
-
-  public void pressAnyKey(){
-    Scanner input = new Scanner(System.in);
-    System.out.print("Press any key to continue.");
-    input.nextLine();
-    this.clearScreen();
-  } // end pressAnyKey
 
   public void showTable(Player player){
     System.out.println("OPPONENTS:");
