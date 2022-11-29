@@ -283,7 +283,20 @@ public class Game {
       this.chooseMonster(player);
       this.pressAnyKey();
     } // end for
+    this.sortPlayers();
   } // end populatePlayers
+
+  public void sortPlayers(){
+    System.out.println("--ROLLING FOR TURN ORDER--\n");
+    for (Player player: this.players){
+      System.out.println(player.name + " playing as " + player.monster.name + " rolled a " + player.monster.d_twenty.value + ".");
+    } // end for
+    Collections.sort(this.players, Collections.reverseOrder());
+    System.out.println("\n--FINAL TURN ORDER--\n");
+    for (Player player: this.players){
+      System.out.println(player.name + " playing as " + player.monster.name);
+    } // end for
+  } // end sortPlayers
 
   public void populateOpponents(){
     for (Player player: this.players){

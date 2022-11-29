@@ -21,6 +21,7 @@ public class TwentyDice extends AbstractDice {
   public TwentyDice(){
     this.sides = 20;
     this.populateDict();
+    this.roll();
   } // end default constructor
   
   public void populateDict(){

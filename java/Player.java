@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Player implements Serializable {
+public class Player implements Serializable, Comparable<Player> {
 
   protected String name;
   protected String password;
@@ -27,6 +27,17 @@ public class Player implements Serializable {
     this.monster_count = new Hashtable<String, Integer>();
     this.populateMonsterCounter();
   } // end default constructor
+
+  // override compareTo
+  public int compareTo(Player opponent){
+    if (this.monster.d_twenty.value == opponent.monster.d_twenty.value){
+      return 0;
+    } else if (this.monster.d_twenty.value > opponent.monster.d_twenty.value){
+      return 1;
+    } else {
+      return -1;
+    } // end if
+  } // end compareTo
 
   public void populateMonsterCounter(){
     this.monster_count.put("GIGAZAUR", 0);

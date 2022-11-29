@@ -7,6 +7,7 @@ public class Monster {
   protected int victory_points = 0;
   protected int energy = 0;
   protected String location = "Outside";
+  protected TwentyDice d_twenty = new TwentyDice();
 
   public static void main(String[] args){
     Monster monster = new Monster();
