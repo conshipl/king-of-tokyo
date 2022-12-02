@@ -4,17 +4,21 @@ My final project for Computing II course at IUPUI.
 
 A recreation of the "King of Tokyo" boardgame written in Java.
 
-## Matches: ##
+## Main Menu Screen: ##
 
-[![red-devil-matches](https://github.com/conshipl/red-devil-fixtures/blob/main/red-devil-matches.PNG)](github.com/conshipl)
+[![mainmenu](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/mainmenu.PNG)](github.iu.edu/conshipl)
 
-## Shows Final Score After Full-Time: ##
+## Average Player Turn Sequence: ##
 
-[![red-devil-fulltime](https://github.com/conshipl/red-devil-fixtures/blob/main/red-devil-fulltime.PNG)]()
+[![playerturn](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/playerturn.PNG)](github.iu.edu/conshipl)
 
-## No Matches: ##
+## View All Saved Players' Stats: ##
 
-[![red-devil-no-matches](https://github.com/conshipl/red-devil-fixtures/blob/main/red-devil-no-matches.PNG)](github.com/conshipl)
+[![allplayerstats](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/allplayerstats.PNG)](github.iu.edu/conshipl)
+
+## Search For A Specific Player's Stats: ##
+
+[![searchplayerstats](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/searchplayerstats.PNG)](github.iu.edu/conshipl)
 
 
 ## Backstory
@@ -38,7 +42,7 @@ When a player outside of Tokyo attacks the King of Tokyo and the King yields, th
 
 User input is not always validated, particularly and most glaringly in the case of a player entering which dice they’d like to keep as a CSV. This is purely just due to my own laziness in not wanting to write a bunch of while loops or try-catch statements, but in the case of the CSV validation, I’ve brainstormed the following function that could be implemented in a while loop to catch bad input:
 
-'''
+```
 public boolean isValidCSV(String[] s){
     try:
         for (int i = 0; i < s.length; i++){
@@ -51,7 +55,7 @@ public boolean isValidCSV(String[] s){
     catch (cast type error):
         return false;
 } // end isValidCSV
-'''
+```
 
 The function would accept an array of Strings as input (so ideally would look like [“1”, “3”, “5”]), then iterate through the array, try to cast each String as an int, and check its value to make sure it’s between 0 and 7. If all elements pass, the function would return true; if an element causes a cast type error or is not between acceptable values, the function would return false.
 
