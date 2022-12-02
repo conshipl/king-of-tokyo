@@ -63,3 +63,5 @@ The final major known issue is that when creating a new account, there is no che
 
 ## Technologies
 Java, Serialization/File IO, makefiles and .jar files
+
+## ***See Project_Proposal.docx For Additional Documentation***
