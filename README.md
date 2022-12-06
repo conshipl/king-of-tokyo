@@ -6,19 +6,19 @@ A recreation of the "King of Tokyo" boardgame written in Java.
 
 ## Main Menu Screen: ##
 
-[![mainmenu](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/mainmenu.PNG)](mainmenu.PNG)
+[![mainmenu](https://github.com/conshipl/king-of-tokyo/blob/master/mainmenu.PNG)](mainmenu.PNG)
 
 ## Average Player Turn Sequence: ##
 
-[![playerturn](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/playerturn.PNG)](playerturn.PNG)
+[![playerturn](https://github.com/conshipl/king-of-tokyo/blob/master/playerturn.PNG)](playerturn.PNG)
 
 ## View All Saved Players' Stats: ##
 
-[![allplayerstats](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/allplayerstats.PNG)](allplayerstats.PNG)
+[![allplayerstats](https://github.com/conshipl/king-of-tokyo/blob/master/allplayerstats.PNG)](allplayerstats.PNG)
 
 ## Search For A Specific Player's Stats: ##
 
-[![searchplayerstats](https://github.iu.edu/conshipl/CSCI24000_fall22_final_project/blob/master/searchplayerstats.PNG)](searchplayerstats.PNG)
+[![searchplayerstats](https://github.com/conshipl/king-of-tokyo/blob/master/searchplayerstats.PNG)](searchplayerstats.PNG)
 
 
 ## Backstory
